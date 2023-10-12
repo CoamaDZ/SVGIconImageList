@@ -11,9 +11,9 @@
 
 //if PreferNativeSvgSupport not active or not available:
 //use Delphi Engine from Image32 library by Angus Johnson (included into Image32 folder)
-{$DEFINE Image32_SVGEngine}
+{.$DEFINE Image32_SVGEngine}
 //or use Engine Skia with skia4delphi wrapper by Vinícius Felipe Botelho Barbosa (included into skia4delphi folder)
-{.$DEFINE Skia_SVGEngine}
+{$DEFINE Skia_SVGEngine}
 
 // When IgnoreAntiAliasedColor is set it svgs paints well but not perfect on
 // all backgrounds.  Works best with Delphi_SVGEngine

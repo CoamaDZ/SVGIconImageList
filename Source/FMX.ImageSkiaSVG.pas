@@ -41,8 +41,8 @@ Uses
   , FMX.Graphics
   , FMX.Objects
   , FMX.ImageSVG
-  , Skia       //You must add those search path: SVGIconImageList\skia4delphi\Source
-  , Skia.FMX;  //and SVGIconImageList\skia4delphi\Source\FMX
+  , System.Skia       //You must add those search path: SVGIconImageList\skia4delphi\Source
+  , FMX.Skia;  //and SVGIconImageList\skia4delphi\Source\FMX
 
 type
   TFmxImageSkiaSVG = class(TFmxImageSVG)
@@ -79,8 +79,8 @@ begin
   inherited;
   //GrayScale and FixedColor
   FSvg.GrayScale := GrayScale;
-  if not GrayScale and (FixedColor <> TColors.SysNone) and
-    (FixedColor <> TColors.SysNone) then
+  if not GrayScale and (FixedColor <> TAlphaColor(TColors.SysNone)) and
+    (FixedColor <> TAlphaColor(TColors.SysNone)) then
     FSvg.OverrideColor := FixedColor
   else
     FSvg.OverrideColor := Default(TAlphaColor);
@@ -135,7 +135,6 @@ procedure TFmxImageSkiaSVG.PaintToBitmap(ABitmap: TBitmap;
   const AZoom: Integer = 100; const KeepAspectRatio: Boolean = True);
 var
   LWidth, LHeight: Integer;
-  LAbsoluteScale: TPointF;
 begin
   Assert(Assigned(FSvg));
   Assert(Assigned(ABitmap));
@@ -146,7 +145,6 @@ begin
   ABitmap.SkiaDraw(
     procedure(const ACanvas: ISkCanvas)
     var
-      LAbsoluteScale: TPointF;
       LDestRect: TRectF;
     begin
       LDestRect := RectF(0, 0, LWidth, LHeight);
